@@ -2,7 +2,7 @@ import { CodeBlock } from '../../elements/code-block';
 import { ResponsiveContentControl } from '../../layouts/responsive-content-control';
 
 const EXAMPLE_CODE: string = `import React from 'react';
-import { useGitHub } from './useGitHub';
+import { useGitHub } from 'use-github-react';
 
 const UserProfile = ({ username }) => {
   const { userInfo } = useGitHub({ username });

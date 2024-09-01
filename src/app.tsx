@@ -6,6 +6,7 @@ import { GettingTopNRepositories } from './components/sections/docs/getting-top-
 import { HandlingErrors } from './components/sections/docs/handling-errors';
 import { HookSignature } from './components/sections/docs/hook-signature';
 import { Installation } from './components/sections/docs/installation';
+import { DocumentationIndex } from './components/sections/documentation-index';
 import { HeroSection } from './components/sections/hero';
 import { Introduction } from './components/sections/introduction';
 
@@ -14,6 +15,7 @@ const App = (): JSX.Element => {
     <div className="App-container p-12 space-y-24 mb-56">
       <HeroSection />
       <Introduction />
+      <DocumentationIndex />
       <Installation />
       <HookSignature />
       <FetchGitHubUserInfo />

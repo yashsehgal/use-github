@@ -8,7 +8,7 @@ const HookSignature = (): JSX.Element => {
       <div className="space-y-4">
         <CodeBlock
           content={
-            "'const useGitHub = ({ username }: IUseGitHubHookProps): IUseGitHubHookReturn;'"
+            'const useGitHub = ({ username }: IUseGitHubHookProps): IUseGitHubHookReturn;'
           }
         />
         <div className="space-y-3" id="hook-signature--params">

@@ -25,7 +25,7 @@ export default UserRepositories;
 
 const FetchGitHubRepositories = (): JSX.Element => {
   return (
-    <ResponsiveContentControl id="fetch-github-repositories">
+    <ResponsiveContentControl id="fetching-github-repositories">
       <h2>Fetching GitHub Repositories</h2>
       <div className="space-y-6">
         <div className="space-y-4">

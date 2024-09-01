@@ -23,7 +23,7 @@ export default UserProfile;
 
 const FetchGitHubUserInfo = (): JSX.Element => {
   return (
-    <ResponsiveContentControl id="fetch-github-user-info">
+    <ResponsiveContentControl id="fetching-github-user-info">
       <h2>Fetching GitHub user info</h2>
       <div className="space-y-6">
         <div className="space-y-4">

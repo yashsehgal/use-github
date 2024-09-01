@@ -3,9 +3,9 @@ import { ResponsiveContentControl } from '../layouts/responsive-content-control'
 const Introduction = (): JSX.Element => {
   return (
     <ResponsiveContentControl id="introduction">
-      <h2 className="text-lg">Introduction</h2>
-      <div className="mt-4 space-y-2">
-        <p className="leading-7">
+      <h2>Introduction</h2>
+      <div className="space-y-2">
+        <p>
           APIs are a big part of web development today, helping apps get
           real-time data from different sources.{' '}
           <a href="https://api.github.com" target="_blank" rel="noreferrer">
@@ -14,7 +14,7 @@ const Introduction = (): JSX.Element => {
           is one of the useful ones, letting you access details about user
           profiles, repositories, and programming languages in projects.
         </p>
-        <p className="leading-7">
+        <p>
           To make it easier to work with this data in React apps, we&apos;ve
           created a custom hook called <code>useGitHub</code>. The{' '}
           <code>useGitHub</code> hook makes connecting to the GitHub API simple

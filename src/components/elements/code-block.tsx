@@ -1,3 +1,4 @@
+import React from 'react';
 import { forwardRef, MouseEvent, useState } from 'react';
 
 export interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {

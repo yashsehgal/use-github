@@ -1,3 +1,4 @@
+import React from 'react';
 import { CodeBlock } from '../../elements/code-block';
 import { ResponsiveContentControl } from '../../layouts/responsive-content-control';
 

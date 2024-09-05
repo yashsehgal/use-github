@@ -1,3 +1,4 @@
+import React from 'react';
 import { Conclusion } from './components/sections/conclusion';
 import { FetchGitHubRepositories } from './components/sections/docs/fetch-github-repositories';
 import { FetchGitHubUserInfo } from './components/sections/docs/fetch-github-user-info';

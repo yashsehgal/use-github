@@ -1,3 +1,4 @@
+import React from 'react';
 import { CodeBlock } from '../../elements/code-block';
 import { ResponsiveContentControl } from '../../layouts/responsive-content-control';
 
@@ -12,6 +13,7 @@ const Installation = (): JSX.Element => {
           on it to make HTTP requests.
         </p>
         <CodeBlock content="npm install axios" />
+        <CodeBlock content='npm install use-github-react' />
       </div>
     </ResponsiveContentControl>
   );

@@ -1,7 +1,20 @@
 {
-  "name": "use-github",
-  "version": "0.1.0",
-  "private": true,
+  "name": "use-github-react",
+  "version": "1.0.0-stable-testing",
+  "description": "React hook for fetching activities and information via GitHub API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "github",
+    "hook",
+    "github-reast-api",
+    "rest-api"
+  ],
+  "author": "Yash Sehgal",
   "dependencies": {
     "@tabler/icons-react": "^3.14.0",
     "@testing-library/jest-dom": "^5.14.1",
@@ -26,6 +39,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "package:build": "tsc -p tsconfig.build.json",
+    "package:prepare": "npm run build",
+    "typecheck": "tsc --noEmit",
     "lint-check": "prettier --check --ignore-path .gitignore .",
     "lint-fix": "prettier --write --ignore-path .gitignore ."
   },
@@ -48,6 +64,12 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.10"
+    "tailwindcss": "^3.4.10",
+    "@types/react": "^18.0.0",
+    "typescript": "^4.4.2",
+    "react": "^18.3.1"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1"
   }
 }

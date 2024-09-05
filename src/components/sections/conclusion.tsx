@@ -1,3 +1,4 @@
+import React from 'react';
 import { ResponsiveContentControl } from '../layouts/responsive-content-control';
 
 const Conclusion = (): JSX.Element => {

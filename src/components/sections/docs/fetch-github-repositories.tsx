@@ -1,8 +1,9 @@
+import React from 'react';
 import { CodeBlock } from '../../elements/code-block';
 import { ResponsiveContentControl } from '../../layouts/responsive-content-control';
 
 const EXAMPLE_CODE: string = `import React from 'react';
-import { useGitHub } from 'use-github-react';
+import { useGitHub } from 'use-github-react/dist/use-github';
 
 const UserRepositories = ({ username }) => {
   const { getRepositories } = useGitHub({ username });

@@ -8,12 +8,13 @@ const Installation = (): JSX.Element => {
       <h2>Installation</h2>
       <div className="space-y-4">
         <p>
-          Before you start using the <code>useGitHub</code> hook, ensure you
-          have <code>axios</code> installed in your project, as this hook relies
-          on it to make HTTP requests.
+          Before you start using the{' '}
+          <code className="inline-code">useGitHub</code> hook, ensure you have{' '}
+          <code className="inline-code">axios</code> installed in your project,
+          as this hook relies on it to make HTTP requests.
         </p>
         <CodeBlock content="npm install axios" />
-        <CodeBlock content='npm install use-github-react' />
+        <CodeBlock content="npm install use-github-react" />
       </div>
     </ResponsiveContentControl>
   );

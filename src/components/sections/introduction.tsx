@@ -17,14 +17,15 @@ const Introduction = (): JSX.Element => {
         </p>
         <p>
           To make it easier to work with this data in React apps, we&apos;ve
-          created a custom hook called <code>useGitHub</code>. The{' '}
-          <code>useGitHub</code> hook makes connecting to the GitHub API simple
-          and takes care of the data you get from it. It fetches user info and
-          repositories, handles errors, and lets you filter repositories by
-          programming language. Using React-based tools for managing state and
-          updates, the hook keeps the data current and easy to use, making it a
-          practical tool for developers looking to add GitHub data to their
-          apps.
+          created a custom hook called{' '}
+          <code className="inline-code">useGitHub</code>. The{' '}
+          <code className="inline-code">useGitHub</code> hook makes connecting
+          to the GitHub API simple and takes care of the data you get from it.
+          It fetches user info and repositories, handles errors, and lets you
+          filter repositories by programming language. Using React-based tools
+          for managing state and updates, the hook keeps the data current and
+          easy to use, making it a practical tool for developers looking to add
+          GitHub data to their apps.
         </p>
       </div>
     </ResponsiveContentControl>

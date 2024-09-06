@@ -30,18 +30,19 @@ const FetchGitHubUserInfo = (): JSX.Element => {
         <div className="space-y-4">
           <p>
             The hook fetches user information from GitHub using the provided
-            <code>username</code>. This data is stored in the{' '}
-            <code>userInfo</code> state, which includes details like the
-            user&apos;s name, bio, public repository count, and more.
+            <code className="inline-code">username</code>. This data is stored
+            in the <code className="inline-code">userInfo</code> state, which
+            includes details like the user&apos;s name, bio, public repository
+            count, and more.
           </p>
-          <CodeBlock content={EXAMPLE_CODE as string} />
+          <CodeBlock content={EXAMPLE_CODE} language="tsx" />
         </div>
         <div className="space-y-4">
           <h3>Do&apos;s</h3>
           <ul>
             <li>
-              Do ensure the <code>username</code> prop is passed correctly to
-              the hook.
+              Do ensure the <code className="inline-code">username</code> prop
+              is passed correctly to the hook.
             </li>
             <li>
               Do handle the loading state gracefully as data is fetched
@@ -53,8 +54,9 @@ const FetchGitHubUserInfo = (): JSX.Element => {
           <h3>Don&apos;ts</h3>
           <ul>
             <li>
-              Don&apos;t assume <code>userInfo</code> will always contain data.
-              Always check if it&apos;s null before accessing properties.
+              Don&apos;t assume <code className="inline-code">userInfo</code>{' '}
+              will always contain data. Always check if it&apos;s null before
+              accessing properties.
             </li>
           </ul>
         </div>

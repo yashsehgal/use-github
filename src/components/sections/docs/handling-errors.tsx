@@ -23,7 +23,7 @@ const HandlingErrors = (): JSX.Element => {
             requests. It logs these errors to the console, allowing developers
             to debug any issues easily.
           </p>
-          <CodeBlock content={EXAMPLE_CODE} />
+          <CodeBlock content={EXAMPLE_CODE} language="tsx" />
         </div>
         <div className="space-y-4">
           <h3>Do&apos;s</h3>

@@ -10,10 +10,11 @@ import { Installation } from './components/sections/docs/installation';
 import { DocumentationIndex } from './components/sections/documentation-index';
 import { HeroSection } from './components/sections/hero';
 import { Introduction } from './components/sections/introduction';
+import { FetchingPinnedRepositories } from './components/sections/docs/fetch-pinned-repositories';
 
 const App = (): JSX.Element => {
   return (
-    <div className="App-container p-12 space-y-24 mb-56">
+    <div className="App-container p-12 space-y-24 mb-24">
       <HeroSection />
       <Introduction />
       <DocumentationIndex />
@@ -23,6 +24,7 @@ const App = (): JSX.Element => {
       <FetchGitHubRepositories />
       <FilteringRepositoriesByLanguage />
       <GettingTopNRepositories />
+      <FetchingPinnedRepositories />
       <HandlingErrors />
       <Conclusion />
     </div>

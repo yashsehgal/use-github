@@ -8,6 +8,7 @@ const HookSignature = (): JSX.Element => {
       <h2>Hook signature</h2>
       <div className="space-y-4">
         <CodeBlock
+          language="tsx"
           content={
             'const useGitHub = ({ username }: IUseGitHubHookProps): IUseGitHubHookReturn;'
           }
@@ -15,24 +16,26 @@ const HookSignature = (): JSX.Element => {
         <div className="space-y-3" id="hook-signature--params">
           <h3>Parameters</h3>
           <p>
-            <code>username</code> (string): The GitHub username for which the
-            data is to be fetched. This is a required parameter.
+            <code className="inline-code">username</code> (string): The GitHub
+            username for which the data is to be fetched. This is a required
+            parameter.
           </p>
         </div>
         <div className="space-y-3" id="hook-signature--return-value">
           <p>The hook returns an object with the following properties:</p>
           <ul>
             <li>
-              <code>userInfo</code> An object containing detailed information
-              about the GitHub user.
+              <code className="inline-code">userInfo</code> An object containing
+              detailed information about the GitHub user.
             </li>
             <li>
-              <code>metadata</code> An object containing metadata about the
-              GitHub API request.
+              <code className="inline-code">metadata</code> An object containing
+              metadata about the GitHub API request.
             </li>
             <li>
-              <code>getRepositories</code>: A function that returns an object
-              with methods for filtering and retrieving repository data.
+              <code className="inline-code">getRepositories</code>: A function
+              that returns an object with methods for filtering and retrieving
+              repository data.
             </li>
           </ul>
         </div>

@@ -30,18 +30,20 @@ const GettingTopNRepositories = (): JSX.Element => {
       <div className="space-y-6">
         <div className="space-y-4">
           <p>
-            The <code>getRepositories</code> function also provides a{' '}
-            <code>top</code> method to retrieve the top N repositories based on
-            their order in the list (sorted by update time).
+            The <code className="inline-code">getRepositories</code> function
+            also provides a <code className="inline-code">top</code> method to
+            retrieve the top N repositories based on their order in the list
+            (sorted by update time).
           </p>
-          <CodeBlock content={EXAMPLE_CODE} />
+          <CodeBlock content={EXAMPLE_CODE} language="tsx" />
         </div>
         <div className="space-y-4">
           <h3>Do&apos;s</h3>
           <ul>
             <li>
-              Do pass a valid number to the <code>top</code> method to get the
-              desired number of repositories.
+              Do pass a valid number to the{' '}
+              <code className="inline-code">top</code> method to get the desired
+              number of repositories.
             </li>
             <li>
               Do handle cases where there are fewer repositories than the

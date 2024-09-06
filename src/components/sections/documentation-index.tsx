@@ -11,6 +11,7 @@ const DOCUMENTATION_INDEX: { name: string; id: string }[] = [
     id: 'filtering-repositories-by-language',
   },
   { name: 'Getting the Top N Repositories', id: 'getting-top-n-repositories' },
+  { name: 'Fetching pinned repositories', id: 'fetching-pinned-repositories' },
   { name: 'Handling Errors', id: 'handling-errors' },
 ];
 

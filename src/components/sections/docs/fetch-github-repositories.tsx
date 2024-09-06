@@ -32,17 +32,19 @@ const FetchGitHubRepositories = (): JSX.Element => {
         <div className="space-y-4">
           <p>
             The hook also retrieves a list of repositories for the specified
-            user. This data is stored in the <code>repositories</code> state,
-            which is an array of objects representing each repository.
+            user. This data is stored in the{' '}
+            <code className="inline-code">repositories</code> state, which is an
+            array of objects representing each repository.
           </p>
-          <CodeBlock content={EXAMPLE_CODE} />
+          <CodeBlock content={EXAMPLE_CODE} language="tsx" />
         </div>
         <div className="space-y-4">
           <h3>Do&apos;s</h3>
           <ul>
             <li>
-              Do use the <code>getRepositories().all()</code> method to retrieve
-              the full list of repositories.
+              Do use the{' '}
+              <code className="inline-code">getRepositories().all()</code>{' '}
+              method to retrieve the full list of repositories.
             </li>
             <li>
               Do iterate over the repositories array to display each

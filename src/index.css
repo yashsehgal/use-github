@@ -7,8 +7,102 @@ body {
   @apply font-serif scroll-smooth;
 }
 
-code {
+.inline-code {
   @apply text-sm px-2 py-1 bg-neutral-50 text-neutral-500 border border-neutral-300 rounded-md mx-0.5 cursor-default hover:bg-neutral-800 hover:text-neutral-50 hover:border-transparent;
+}
+
+.hljs {
+  background: transparent;
+  @apply text-white;
+  @apply font-normal;
+}
+
+.hljs-keyword {
+  color: #569cd6;
+  @apply font-normal;
+}
+.hljs-built_in {
+  color: #4ec9b0;
+  @apply font-normal;
+}
+.hljs-type {
+  color: #4ec9b0;
+  @apply font-normal;
+}
+.hljs-literal {
+  color: #569cd6;
+  @apply font-normal;
+}
+.hljs-number {
+  color: #b5cea8;
+  @apply font-normal;
+}
+.hljs-regexp {
+  color: #d16969;
+  @apply font-normal;
+}
+.hljs-string {
+  color: #ce9178;
+  @apply font-normal;
+}
+.hljs-subst {
+  color: #c4c9cc;
+  @apply font-normal;
+}
+.hljs-symbol {
+  color: #d7ba7d;
+  @apply font-normal;
+}
+.hljs-class {
+  color: #4ec9b0;
+  @apply font-normal;
+}
+.hljs-function {
+  color: #dcdcaa;
+  @apply font-normal;
+}
+.hljs-title {
+  color: #dcdcaa;
+  @apply font-normal;
+}
+.hljs-params {
+  color: #c4c9cc;
+  @apply font-normal;
+}
+.hljs-comment {
+  color: #6a9955;
+  @apply font-normal;
+}
+.hljs-doctag {
+  color: #608b4e;
+  @apply font-normal;
+}
+.hljs-meta {
+  color: #569cd6;
+  @apply font-normal;
+}
+.hljs-meta-keyword {
+  color: #569cd6;
+  @apply font-normal;
+}
+.hljs-meta-string {
+  color: #ce9178;
+  @apply font-normal;
+}
+
+.hljs-tag {
+  @apply text-indigo-400;
+  @apply font-normal;
+}
+
+.hljs-name {
+  @apply !text-indigo-400;
+  @apply font-normal;
+}
+
+.hljs-attr {
+  @apply !text-teal-400;
+  @apply font-normal;
 }
 
 a {

@@ -30,18 +30,19 @@ const FilteringRepositoriesByLanguage = (): JSX.Element => {
       <div className="space-y-6">
         <div className="space-y-4">
           <p>
-            The <code>getRepositories</code> function provides a method
-            <code>withLanguage</code> that allows you to filter repositories
-            based on specific programming languages.
+            The <code className="inline-code">getRepositories</code> function
+            provides a method
+            <code className="inline-code">withLanguage</code> that allows you to
+            filter repositories based on specific programming languages.
           </p>
-          <CodeBlock content={EXAMPLE_CODE} />
+          <CodeBlock content={EXAMPLE_CODE} language="tsx" />
         </div>
         <div className="space-y-4">
           <h3>Do&apos;s</h3>
           <ul>
             <li>
               Do pass an array of valid programming languages (in lowercase) to
-              the <code>withLanguage</code> method.
+              the <code className="inline-code">withLanguage</code> method.
             </li>
             <li>Do check the filtered list for content before rendering.</li>
           </ul>
@@ -51,7 +52,7 @@ const FilteringRepositoriesByLanguage = (): JSX.Element => {
           <ul>
             <li>
               Don't use incorrect casing for language names. The{' '}
-              <code>withLanguage</code>
+              <code className="inline-code">withLanguage</code>
               method expects lowercase language names.
             </li>
           </ul>

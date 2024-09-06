@@ -65,6 +65,7 @@ export interface IUseGitHubHookReturn {
     all: () => IGitHubRepo[];
     withLanguage: (languages: ProgrammingLanguage[]) => IGitHubRepo[];
     top: (n: number) => IGitHubRepo[];
+    pinned: () => IGitHubRepo[];
   };
 }
 

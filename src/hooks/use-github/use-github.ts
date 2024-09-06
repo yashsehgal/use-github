@@ -8,7 +8,6 @@ import {
   IGitHubRepo,
   ProgrammingLanguage,
 } from './interfaces/global';
-import { ENVIRONMENT } from '../../helpers/utils';
 
 const GITHUB_REST_URL: string = 'https://api.github.com' as const;
 const GITHUB_GRAPHQL_URL: string = 'https://api.github.com/graphql' as const;
@@ -20,8 +19,6 @@ const useGitHub = ({ username }: IUseGitHubHookProps): IUseGitHubHookReturn => {
   const [pinnedRepositories, setPinnedRepositories] = useState<IGitHubRepo[]>(
     [],
   );
-
-  console.log('ENV', ENVIRONMENT.GITHUB_ACCESS_TOKEN);
 
   const fetchGitHubData = useCallback(async () => {
     if (!username) return null;
@@ -110,7 +107,7 @@ const useGitHub = ({ username }: IUseGitHubHookProps): IUseGitHubHookReturn => {
         { query },
         {
           headers: {
-            Authorization: `Bearer ${ENVIRONMENT.GITHUB_ACCESS_TOKEN}`,
+            Authorization: `Bearer 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`,
           },
         },
       );

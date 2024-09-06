@@ -48,11 +48,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 import axios from 'axios';
 import { useState, useCallback, useEffect } from 'react';
 var GITHUB_REST_URL = 'https://api.github.com';
+var GITHUB_GRAPHQL_URL = 'https://api.github.com/graphql';
 var useGitHub = function (_a) {
     var username = _a.username;
     var _b = useState(null), metadata = _b[0], setMetadata = _b[1];
     var _c = useState(null), userInfo = _c[0], setUserInfo = _c[1];
     var _d = useState([]), repositories = _d[0], setRepositories = _d[1];
+    var _e = useState([]), pinnedRepositories = _e[0], setPinnedRepositories = _e[1];
     var fetchGitHubData = useCallback(function () { return __awaiter(void 0, void 0, void 0, function () {
         var response, data, config, headers, request, status_1, newMetadata, error_1;
         return __generator(this, function (_a) {
@@ -119,6 +121,45 @@ var useGitHub = function (_a) {
             }
         });
     }); }, [username]);
+    var fetchPinnedRepositories = useCallback(function () { return __awaiter(void 0, void 0, void 0, function () {
+        var query, response, pinnedRepos, error_3;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (!username)
+                        return [2 /*return*/];
+                    query = "\n      query {\n        user(login: \"".concat(username, "\") {\n          pinnedItems(first: 6, types: REPOSITORY) {\n            nodes {\n              ... on Repository {\n                id\n                name\n                description\n                url\n                stargazerCount\n                forkCount\n                primaryLanguage {\n                  name\n                }\n              }\n            }\n          }\n        }\n      }\n    ");
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, axios.post(GITHUB_GRAPHQL_URL, { query: query }, {
+                            headers: {
+                                Authorization: "Bearer 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",
+                            },
+                        })];
+                case 2:
+                    response = _a.sent();
+                    pinnedRepos = response.data.data.user.pinnedItems.nodes.map(function (repo) { return ({
+                        id: repo.id,
+                        name: repo.name,
+                        description: repo.description,
+                        html_url: repo.url,
+                        stargazers_count: repo.stargazerCount,
+                        forks_count: repo.forkCount,
+                        language: repo.primaryLanguage
+                            ? repo.primaryLanguage.name.toLowerCase()
+                            : null,
+                    }); });
+                    setPinnedRepositories(pinnedRepos);
+                    return [3 /*break*/, 4];
+                case 3:
+                    error_3 = _a.sent();
+                    console.error('Error while fetching pinned repositories:', error_3);
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    }); }, [username]);
     useEffect(function () {
         fetchGitHubData().then(function (meta) {
             if (meta) {
@@ -126,7 +167,13 @@ var useGitHub = function (_a) {
             }
         });
         fetchRepositories();
-    }, [fetchGitHubData, updateUserInfo, fetchRepositories]);
+        fetchPinnedRepositories();
+    }, [
+        fetchGitHubData,
+        updateUserInfo,
+        fetchRepositories,
+        fetchPinnedRepositories,
+    ]);
     var getRepositories = useCallback(function () {
         return {
             all: function () { return repositories; },
@@ -134,8 +181,9 @@ var useGitHub = function (_a) {
                 return repositories.filter(function (repo) { return repo.language && languages.includes(repo.language); });
             },
             top: function (n) { return repositories.slice(0, n); },
+            pinned: function () { return pinnedRepositories; },
         };
-    }, [repositories]);
+    }, [repositories, pinnedRepositories]);
     return {
         userInfo: userInfo,
         metadata: metadata,

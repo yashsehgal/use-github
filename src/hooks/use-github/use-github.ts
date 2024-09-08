@@ -12,7 +12,10 @@ import {
 const GITHUB_REST_URL: string = 'https://api.github.com' as const;
 const GITHUB_GRAPHQL_URL: string = 'https://api.github.com/graphql' as const;
 
-const useGitHub = ({ username }: IUseGitHubHookProps): IUseGitHubHookReturn => {
+const useGitHub = ({
+  username,
+  personalAccessToken,
+}: IUseGitHubHookProps): IUseGitHubHookReturn => {
   const [metadata, setMetadata] = useState<IUseGitHubHookMetadata | null>(null);
   const [userInfo, setUserInfo] = useState<IGitHubUserInfo | null>(null);
   const [repositories, setRepositories] = useState<IGitHubRepo[]>([]);
@@ -107,7 +110,7 @@ const useGitHub = ({ username }: IUseGitHubHookProps): IUseGitHubHookReturn => {
         { query },
         {
           headers: {
-            Authorization: `Bearer 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`,
+            Authorization: `Bearer ${personalAccessToken}`,
           },
         },
       );
@@ -130,7 +133,7 @@ const useGitHub = ({ username }: IUseGitHubHookProps): IUseGitHubHookReturn => {
     } catch (error) {
       console.error('Error while fetching pinned repositories:', error);
     }
-  }, [username]);
+  }, [username, personalAccessToken]);
 
   useEffect(() => {
     fetchGitHubData().then((meta) => {

@@ -56,6 +56,7 @@ export type ProgrammingLanguage =
 
 export interface IUseGitHubHookProps {
   username: string;
+  personalAccessToken?: string;
 }
 
 export interface IUseGitHubHookReturn {

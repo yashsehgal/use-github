@@ -11,6 +11,10 @@ body {
   @apply text-sm px-2 py-1 bg-neutral-50 text-neutral-500 border border-neutral-300 rounded-md mx-0.5 cursor-default hover:bg-neutral-800 hover:text-neutral-50 hover:border-transparent;
 }
 
+.inline-info {
+  @apply p-4 rounded-lg bg-blue-100;
+}
+
 .hljs {
   background: transparent;
   @apply text-white;

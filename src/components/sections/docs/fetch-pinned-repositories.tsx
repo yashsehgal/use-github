@@ -6,7 +6,10 @@ const EXAMPLE_CODE: string = `import React from 'react';
 import { useGitHub } from 'use-github-react/dist/use-github';
 
 const PinnedRepositories = ({ username }) => {
-  const { getRepositories } = useGitHub({ username });
+  const { getRepositories } = useGitHub({ 
+    username, 
+    personalAccessToken: process.env.GITHUB_PERSONAL_ACCESS_TOKEN 
+  });
   const pinnedRepos = getRepositories().pinned();
 
   return (
@@ -53,8 +56,9 @@ const FetchingPinnedRepositories = (): JSX.Element => {
           </p>
           <p>
             The hook fetches the first six pinned repositories for the provided
-            <code className="inline-code">username</code>. The pinned
-            repositories are returned through the
+            <code className="inline-code">username</code> and most importantly,{' '}
+            the <code className="inline-code">personalAccessToken</code>. The
+            pinned repositories are returned through the
             <code className="inline-code">getRepositories</code> method, using
             the <code className="inline-code">pinned()</code> function.
           </p>
@@ -63,6 +67,18 @@ const FetchingPinnedRepositories = (): JSX.Element => {
         <div className="space-y-4">
           <h3>Do&apos;s</h3>
           <ul>
+            <li>
+              Make sure to use{' '}
+              <code className="inline-code">personalAccessToken</code> inside
+              the hook configuration. Use{' '}
+              <a
+                href="https://create-react-app.dev/docs/adding-custom-environment-variables/"
+                target="_blank"
+                rel="noreferrer">
+                env variables
+              </a>{' '}
+              for storing your personal access token.
+            </li>
             <li>
               Do use the{' '}
               <code className="inline-code">getRepositories().pinned()</code>{' '}

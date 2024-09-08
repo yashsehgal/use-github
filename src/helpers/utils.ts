@@ -6,5 +6,5 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const ENVIRONMENT = {
-  GITHUB_ACCESS_TOKEN: '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',
+  GITHUB_ACCESS_TOKEN: process.env.REACT_APP_GITHUB_ACCESS_TOKEN,
 };

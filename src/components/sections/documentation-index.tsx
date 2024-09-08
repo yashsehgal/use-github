@@ -1,7 +1,7 @@
 import React from 'react';
 import { ResponsiveContentControl } from '../layouts/responsive-content-control';
 
-const DOCUMENTATION_INDEX: { name: string; id: string }[] = [
+const DOCUMENTATION_INDEX: { name: string; id: string; isNew?: boolean }[] = [
   { name: 'Installation', id: 'installation' },
   { name: 'Hook signature', id: 'hook-signature' },
   { name: 'Fetching GitHub user info', id: 'fetching-github-user-info' },
@@ -11,7 +11,11 @@ const DOCUMENTATION_INDEX: { name: string; id: string }[] = [
     id: 'filtering-repositories-by-language',
   },
   { name: 'Getting the Top N Repositories', id: 'getting-top-n-repositories' },
-  { name: 'Fetching pinned repositories', id: 'fetching-pinned-repositories' },
+  {
+    name: 'Fetching pinned repositories',
+    id: 'fetching-pinned-repositories',
+    isNew: true,
+  },
   { name: 'Handling Errors', id: 'handling-errors' },
 ];
 
@@ -23,7 +27,10 @@ const DocumentationIndex = (): JSX.Element => {
         {DOCUMENTATION_INDEX.map((documentationItem, index) => {
           return (
             <li key={index}>
-              <a href={`#${documentationItem.id}`}>{documentationItem.name}</a>
+              <a href={`#${documentationItem.id}`}>{documentationItem.name}</a>{' '}
+              {documentationItem.isNew && (
+                <span className="new-badge">new</span>
+              )}
             </li>
           );
         })}

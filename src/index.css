@@ -15,6 +15,10 @@ body {
   @apply p-4 rounded-lg bg-blue-100;
 }
 
+.new-badge {
+  @apply text-sm font-medium text-black bg-green-400 rounded-full px-2 py-1 w-fit h-fit;
+}
+
 .hljs {
   background: transparent;
   @apply text-white;

@@ -50,7 +50,7 @@ import { useState, useCallback, useEffect } from 'react';
 var GITHUB_REST_URL = 'https://api.github.com';
 var GITHUB_GRAPHQL_URL = 'https://api.github.com/graphql';
 var useGitHub = function (_a) {
-    var username = _a.username;
+    var username = _a.username, personalAccessToken = _a.personalAccessToken;
     var _b = useState(null), metadata = _b[0], setMetadata = _b[1];
     var _c = useState(null), userInfo = _c[0], setUserInfo = _c[1];
     var _d = useState([]), repositories = _d[0], setRepositories = _d[1];
@@ -134,7 +134,7 @@ var useGitHub = function (_a) {
                     _a.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, axios.post(GITHUB_GRAPHQL_URL, { query: query }, {
                             headers: {
-                                Authorization: "Bearer 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",
+                                Authorization: "Bearer ".concat(personalAccessToken),
                             },
                         })];
                 case 2:
@@ -159,7 +159,7 @@ var useGitHub = function (_a) {
                 case 4: return [2 /*return*/];
             }
         });
-    }); }, [username]);
+    }); }, [username, personalAccessToken]);
     useEffect(function () {
         fetchGitHubData().then(function (meta) {
             if (meta) {

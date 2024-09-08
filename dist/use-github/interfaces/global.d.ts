@@ -1,6 +1,7 @@
 export type ProgrammingLanguage = 'javascript' | 'typescript' | 'python' | 'java' | 'c' | 'c++' | 'c#' | 'ruby' | 'go' | 'rust' | 'swift' | 'kotlin' | 'php' | 'html' | 'css' | 'shell' | 'powershell' | 'scala' | 'r' | 'dart' | 'lua' | 'perl' | 'haskell' | 'julia' | 'elixir' | 'clojure' | 'erlang' | 'f#' | 'ocaml' | 'groovy' | 'matlab' | 'assembly' | 'visual basic' | 'objective-c' | 'fortran' | 'lisp' | 'prolog' | 'scheme' | 'cobol' | 'delphi' | 'pascal' | 'ada' | 'sql' | 'pl/sql' | 't-sql' | 'bash' | 'tcl' | 'verilog' | 'vhdl' | 'smalltalk' | 'elm' | 'coffeescript' | 'vba' | 'apex';
 export interface IUseGitHubHookProps {
     username: string;
+    personalAccessToken?: string;
 }
 export interface IUseGitHubHookReturn {
     userInfo: IGitHubUserInfo | null;

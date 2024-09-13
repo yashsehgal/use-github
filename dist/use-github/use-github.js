@@ -45,8 +45,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import axios from 'axios';
 import { useState, useCallback, useEffect } from 'react';
+import axios from 'axios';
 var GITHUB_REST_URL = 'https://api.github.com';
 var GITHUB_GRAPHQL_URL = 'https://api.github.com/graphql';
 var useGitHub = function (_a) {
@@ -126,7 +126,7 @@ var useGitHub = function (_a) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    if (!username)
+                    if (!username || !personalAccessToken)
                         return [2 /*return*/];
                     query = "\n      query {\n        user(login: \"".concat(username, "\") {\n          pinnedItems(first: 6, types: REPOSITORY) {\n            nodes {\n              ... on Repository {\n                id\n                name\n                description\n                url\n                stargazerCount\n                forkCount\n                primaryLanguage {\n                  name\n                }\n              }\n            }\n          }\n        }\n      }\n    ");
                     _a.label = 1;
@@ -174,14 +174,43 @@ var useGitHub = function (_a) {
         fetchRepositories,
         fetchPinnedRepositories,
     ]);
+    var calculateLanguageDistribution = function (repos) {
+        var languageCounts = {};
+        var totalCount = 0;
+        repos.forEach(function (repo) {
+            if (repo.language) {
+                languageCounts[repo.language] =
+                    (languageCounts[repo.language] || 0) + 1;
+                totalCount++;
+            }
+        });
+        return Object.entries(languageCounts).map(function (_a) {
+            var language = _a[0], count = _a[1];
+            return ({
+                language: language,
+                percentage: count / totalCount,
+            });
+        });
+    };
     var getRepositories = useCallback(function () {
+        var createRepositoryGetter = function (repoGetter) {
+            var getter = repoGetter;
+            getter.languageDistribution = function () {
+                return calculateLanguageDistribution(repoGetter());
+            };
+            return getter;
+        };
         return {
-            all: function () { return repositories; },
+            all: createRepositoryGetter(function () { return repositories; }),
             withLanguage: function (languages) {
-                return repositories.filter(function (repo) { return repo.language && languages.includes(repo.language); });
+                return createRepositoryGetter(function () {
+                    return repositories.filter(function (repo) { return repo.language && languages.includes(repo.language); });
+                });
             },
-            top: function (n) { return repositories.slice(0, n); },
-            pinned: function () { return pinnedRepositories; },
+            top: function (n) {
+                return createRepositoryGetter(function () { return repositories.slice(0, n); });
+            },
+            pinned: createRepositoryGetter(function () { return pinnedRepositories; }),
         };
     }, [repositories, pinnedRepositories]);
     return {

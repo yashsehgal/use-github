@@ -28,7 +28,7 @@ const PinnedRepositories = ({ username }) => {
   );
 };
 
-export default PinnedRepositories;`;
+export default PinnedRepositories;` as const;
 
 export const DEMO_RESPONSE_CODE: string = `{
   "id": "123456",
@@ -39,7 +39,7 @@ export const DEMO_RESPONSE_CODE: string = `{
   "forks_count": 10,
   "language": "javascript"
 }
-`;
+` as const;
 
 const FetchingPinnedRepositories = (): JSX.Element => {
   return (

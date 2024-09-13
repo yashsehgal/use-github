@@ -11,6 +11,7 @@ import { DocumentationIndex } from './components/sections/documentation-index';
 import { HeroSection } from './components/sections/hero';
 import { Introduction } from './components/sections/introduction';
 import { FetchingPinnedRepositories } from './components/sections/docs/fetch-pinned-repositories';
+import { GitHubLanguageDistribution } from './components/sections/docs/github-language-distribution';
 
 const App = (): JSX.Element => {
   return (
@@ -25,6 +26,7 @@ const App = (): JSX.Element => {
       <FilteringRepositoriesByLanguage />
       <GettingTopNRepositories />
       <FetchingPinnedRepositories />
+      <GitHubLanguageDistribution />
       <HandlingErrors />
       <Conclusion />
     </div>

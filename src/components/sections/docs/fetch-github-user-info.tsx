@@ -20,7 +20,7 @@ const UserProfile = ({ username }) => {
 };
 
 export default UserProfile;
-`;
+` as const;
 
 const FetchGitHubUserInfo = (): JSX.Element => {
   return (

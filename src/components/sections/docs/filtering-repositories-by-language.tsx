@@ -21,7 +21,7 @@ const PythonRepositories = ({ username }) => {
 };
 
 export default PythonRepositories;
-`;
+` as const;
 
 const FilteringRepositoriesByLanguage = (): JSX.Element => {
   return (

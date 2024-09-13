@@ -10,7 +10,7 @@ useEffect(() => {
     console.error('User not found. Check the username or try again later.');
   }
 }, [userInfo]);
-`;
+` as const;
 
 const HandlingErrors = (): JSX.Element => {
   return (

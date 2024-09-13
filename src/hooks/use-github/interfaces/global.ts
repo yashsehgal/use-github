@@ -59,15 +59,27 @@ export interface IUseGitHubHookProps {
   personalAccessToken?: string;
 }
 
+export interface LanguageDistribution {
+  language: ProgrammingLanguage;
+  percentage: number;
+}
+
+export type RepositoryGetter = {
+  (): IGitHubRepo[];
+  languageDistribution: () => LanguageDistribution[];
+};
+
+export interface IGetRepositories {
+  all: RepositoryGetter;
+  withLanguage: (languages: ProgrammingLanguage[]) => RepositoryGetter;
+  top: (n: number) => RepositoryGetter;
+  pinned: RepositoryGetter;
+}
+
 export interface IUseGitHubHookReturn {
   userInfo: IGitHubUserInfo | null;
   metadata: IUseGitHubHookMetadata | null;
-  getRepositories: () => {
-    all: () => IGitHubRepo[];
-    withLanguage: (languages: ProgrammingLanguage[]) => IGitHubRepo[];
-    top: (n: number) => IGitHubRepo[];
-    pinned: () => IGitHubRepo[];
-  };
+  getRepositories: () => IGetRepositories;
 }
 
 export interface IUseGitHubHookMetadata {

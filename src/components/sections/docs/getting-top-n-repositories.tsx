@@ -21,7 +21,7 @@ const TopRepositories = ({ username, count }) => {
 };
 
 export default TopRepositories;
-`;
+` as const;
 
 const GettingTopNRepositories = (): JSX.Element => {
   return (

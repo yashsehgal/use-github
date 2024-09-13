@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { useState, useCallback, useEffect } from 'react';
+import axios from 'axios';
 import {
   IGitHubUserInfo,
   IUseGitHubHookMetadata,
@@ -7,6 +7,9 @@ import {
   IUseGitHubHookReturn,
   IGitHubRepo,
   ProgrammingLanguage,
+  LanguageDistribution,
+  IGetRepositories,
+  RepositoryGetter,
 } from './interfaces/global';
 
 const GITHUB_REST_URL: string = 'https://api.github.com' as const;
@@ -80,7 +83,7 @@ const useGitHub = ({
   }, [username]);
 
   const fetchPinnedRepositories = useCallback(async () => {
-    if (!username) return;
+    if (!username || !personalAccessToken) return;
 
     const query = `
       query {
@@ -150,16 +153,47 @@ const useGitHub = ({
     fetchPinnedRepositories,
   ]);
 
-  const getRepositories = useCallback(() => {
+  const calculateLanguageDistribution = (
+    repos: IGitHubRepo[],
+  ): LanguageDistribution[] => {
+    const languageCounts: { [key in ProgrammingLanguage]?: number } = {};
+    let totalCount = 0;
+
+    repos.forEach((repo) => {
+      if (repo.language) {
+        languageCounts[repo.language] =
+          (languageCounts[repo.language] || 0) + 1;
+        totalCount++;
+      }
+    });
+
+    return Object.entries(languageCounts).map(([language, count]) => ({
+      language: language as ProgrammingLanguage,
+      percentage: count! / totalCount,
+    }));
+  };
+
+  const getRepositories = useCallback((): IGetRepositories => {
+    const createRepositoryGetter = (
+      repoGetter: () => IGitHubRepo[],
+    ): RepositoryGetter => {
+      const getter = repoGetter as RepositoryGetter;
+      getter.languageDistribution = () =>
+        calculateLanguageDistribution(repoGetter());
+      return getter;
+    };
+
     return {
-      all: () => repositories,
-      withLanguage: (languages: ProgrammingLanguage[]) => {
-        return repositories.filter(
-          (repo) => repo.language && languages.includes(repo.language),
-        );
-      },
-      top: (n: number) => repositories.slice(0, n),
-      pinned: () => pinnedRepositories,
+      all: createRepositoryGetter(() => repositories),
+      withLanguage: (languages: ProgrammingLanguage[]) =>
+        createRepositoryGetter(() =>
+          repositories.filter(
+            (repo) => repo.language && languages.includes(repo.language),
+          ),
+        ),
+      top: (n: number) =>
+        createRepositoryGetter(() => repositories.slice(0, n)),
+      pinned: createRepositoryGetter(() => pinnedRepositories),
     };
   }, [repositories, pinnedRepositories]);
 

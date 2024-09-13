@@ -22,7 +22,7 @@ const UserRepositories = ({ username }) => {
 };
 
 export default UserRepositories;
-`;
+` as const;
 
 const FetchGitHubRepositories = (): JSX.Element => {
   return (

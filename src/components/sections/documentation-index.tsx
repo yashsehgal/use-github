@@ -16,6 +16,11 @@ const DOCUMENTATION_INDEX: { name: string; id: string; isNew?: boolean }[] = [
     id: 'fetching-pinned-repositories',
     isNew: true,
   },
+  {
+    name: 'Language Distribution',
+    id: 'language-distribution',
+    isNew: true,
+  },
   { name: 'Handling Errors', id: 'handling-errors' },
 ];
 

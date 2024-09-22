@@ -14,6 +14,8 @@ import {
 
 const GITHUB_REST_URL: string = 'https://api.github.com' as const;
 const GITHUB_GRAPHQL_URL: string = 'https://api.github.com/graphql' as const;
+const GITHUB_RAW_CONTENT_URL: string =
+  'https://raw.githubusercontent.com' as const;
 
 const useGitHub = ({
   username,
@@ -25,6 +27,11 @@ const useGitHub = ({
   const [pinnedRepositories, setPinnedRepositories] = useState<IGitHubRepo[]>(
     [],
   );
+  const [followers, setFollowers] = useState<IGitHubUserInfo[]>([]);
+  const [followings, setFollowings] = useState<IGitHubUserInfo[]>([]);
+  const [profileReadmeContent, setProfileReadmeContent] = useState<
+    string | null
+  >(null);
 
   const fetchGitHubData = useCallback(async () => {
     if (!username) return null;
@@ -138,6 +145,54 @@ const useGitHub = ({
     }
   }, [username, personalAccessToken]);
 
+  const fetchFollowers = useCallback(async () => {
+    if (!username) return;
+
+    try {
+      const response = await axios.get(
+        `${GITHUB_REST_URL}/users/${username}/followers?per_page=100`,
+      );
+      const followerPromises = response.data.map((follower: { url: string }) =>
+        axios.get(follower.url),
+      );
+      const followerResponses = await Promise.all(followerPromises);
+      setFollowers(followerResponses.map((response) => response.data));
+    } catch (error) {
+      console.error('Error while fetching followers:', error);
+    }
+  }, [username]);
+
+  const fetchFollowings = useCallback(async () => {
+    if (!username) return;
+
+    try {
+      const response = await axios.get(
+        `${GITHUB_REST_URL}/users/${username}/following?per_page=100`,
+      );
+      const followingPromises = response.data.map(
+        (following: { url: string }) => axios.get(following.url),
+      );
+      const followingResponses = await Promise.all(followingPromises);
+      setFollowings(followingResponses.map((response) => response.data));
+    } catch (error) {
+      console.error('Error while fetching followings:', error);
+    }
+  }, [username]);
+
+  const fetchProfileReadme = useCallback(async () => {
+    if (!username) return;
+
+    try {
+      const response = await axios.get(
+        `${GITHUB_RAW_CONTENT_URL}/${username}/${username}/main/README.md`,
+      );
+      setProfileReadmeContent(response.data);
+    } catch (error) {
+      console.error('Error while fetching profile README:', error);
+      setProfileReadmeContent(null);
+    }
+  }, [username]);
+
   useEffect(() => {
     fetchGitHubData().then((meta) => {
       if (meta) {
@@ -146,11 +201,17 @@ const useGitHub = ({
     });
     fetchRepositories();
     fetchPinnedRepositories();
+    fetchFollowers();
+    fetchFollowings();
+    fetchProfileReadme();
   }, [
     fetchGitHubData,
     updateUserInfo,
     fetchRepositories,
     fetchPinnedRepositories,
+    fetchFollowers,
+    fetchFollowings,
+    fetchProfileReadme,
   ]);
 
   const calculateLanguageDistribution = (
@@ -197,8 +258,22 @@ const useGitHub = ({
     };
   }, [repositories, pinnedRepositories]);
 
+  const getFollowers = useCallback(() => followers, [followers]);
+  const getFollowings = useCallback(() => followings, [followings]);
+  const profileReadme = useCallback(
+    () => profileReadmeContent,
+    [profileReadmeContent],
+  );
+
   return {
-    userInfo,
+    userInfo: userInfo
+      ? {
+          ...userInfo,
+          getFollowers,
+          getFollowings,
+          profileReadme,
+        }
+      : null,
     metadata,
     getRepositories,
   };

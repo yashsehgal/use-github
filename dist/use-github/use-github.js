@@ -49,12 +49,16 @@ import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 var GITHUB_REST_URL = 'https://api.github.com';
 var GITHUB_GRAPHQL_URL = 'https://api.github.com/graphql';
+var GITHUB_RAW_CONTENT_URL = 'https://raw.githubusercontent.com';
 var useGitHub = function (_a) {
     var username = _a.username, personalAccessToken = _a.personalAccessToken;
     var _b = useState(null), metadata = _b[0], setMetadata = _b[1];
     var _c = useState(null), userInfo = _c[0], setUserInfo = _c[1];
     var _d = useState([]), repositories = _d[0], setRepositories = _d[1];
     var _e = useState([]), pinnedRepositories = _e[0], setPinnedRepositories = _e[1];
+    var _f = useState([]), followers = _f[0], setFollowers = _f[1];
+    var _g = useState([]), followings = _g[0], setFollowings = _g[1];
+    var _h = useState(null), profileReadmeContent = _h[0], setProfileReadmeContent = _h[1];
     var fetchGitHubData = useCallback(function () { return __awaiter(void 0, void 0, void 0, function () {
         var response, data, config, headers, request, status_1, newMetadata, error_1;
         return __generator(this, function (_a) {
@@ -160,6 +164,86 @@ var useGitHub = function (_a) {
             }
         });
     }); }, [username, personalAccessToken]);
+    var fetchFollowers = useCallback(function () { return __awaiter(void 0, void 0, void 0, function () {
+        var response, followerPromises, followerResponses, error_4;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (!username)
+                        return [2 /*return*/];
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 4, , 5]);
+                    return [4 /*yield*/, axios.get("".concat(GITHUB_REST_URL, "/users/").concat(username, "/followers?per_page=100"))];
+                case 2:
+                    response = _a.sent();
+                    followerPromises = response.data.map(function (follower) {
+                        return axios.get(follower.url);
+                    });
+                    return [4 /*yield*/, Promise.all(followerPromises)];
+                case 3:
+                    followerResponses = _a.sent();
+                    setFollowers(followerResponses.map(function (response) { return response.data; }));
+                    return [3 /*break*/, 5];
+                case 4:
+                    error_4 = _a.sent();
+                    console.error('Error while fetching followers:', error_4);
+                    return [3 /*break*/, 5];
+                case 5: return [2 /*return*/];
+            }
+        });
+    }); }, [username]);
+    var fetchFollowings = useCallback(function () { return __awaiter(void 0, void 0, void 0, function () {
+        var response, followingPromises, followingResponses, error_5;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (!username)
+                        return [2 /*return*/];
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 4, , 5]);
+                    return [4 /*yield*/, axios.get("".concat(GITHUB_REST_URL, "/users/").concat(username, "/following?per_page=100"))];
+                case 2:
+                    response = _a.sent();
+                    followingPromises = response.data.map(function (following) { return axios.get(following.url); });
+                    return [4 /*yield*/, Promise.all(followingPromises)];
+                case 3:
+                    followingResponses = _a.sent();
+                    setFollowings(followingResponses.map(function (response) { return response.data; }));
+                    return [3 /*break*/, 5];
+                case 4:
+                    error_5 = _a.sent();
+                    console.error('Error while fetching followings:', error_5);
+                    return [3 /*break*/, 5];
+                case 5: return [2 /*return*/];
+            }
+        });
+    }); }, [username]);
+    var fetchProfileReadme = useCallback(function () { return __awaiter(void 0, void 0, void 0, function () {
+        var response, error_6;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (!username)
+                        return [2 /*return*/];
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, axios.get("".concat(GITHUB_RAW_CONTENT_URL, "/").concat(username, "/").concat(username, "/main/README.md"))];
+                case 2:
+                    response = _a.sent();
+                    setProfileReadmeContent(response.data);
+                    return [3 /*break*/, 4];
+                case 3:
+                    error_6 = _a.sent();
+                    console.error('Error while fetching profile README:', error_6);
+                    setProfileReadmeContent(null);
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    }); }, [username]);
     useEffect(function () {
         fetchGitHubData().then(function (meta) {
             if (meta) {
@@ -168,11 +252,17 @@ var useGitHub = function (_a) {
         });
         fetchRepositories();
         fetchPinnedRepositories();
+        fetchFollowers();
+        fetchFollowings();
+        fetchProfileReadme();
     }, [
         fetchGitHubData,
         updateUserInfo,
         fetchRepositories,
         fetchPinnedRepositories,
+        fetchFollowers,
+        fetchFollowings,
+        fetchProfileReadme,
     ]);
     var calculateLanguageDistribution = function (repos) {
         var languageCounts = {};
@@ -213,8 +303,12 @@ var useGitHub = function (_a) {
             pinned: createRepositoryGetter(function () { return pinnedRepositories; }),
         };
     }, [repositories, pinnedRepositories]);
+    var getFollowers = useCallback(function () { return followers; }, [followers]);
+    var getFollowings = useCallback(function () { return followings; }, [followings]);
+    var profileReadme = useCallback(function () { return profileReadmeContent; }, [profileReadmeContent]);
     return {
-        userInfo: userInfo,
+        userInfo: userInfo
+            ? __assign(__assign({}, userInfo), { getFollowers: getFollowers, getFollowings: getFollowings, profileReadme: profileReadme }) : null,
         metadata: metadata,
         getRepositories: getRepositories,
     };

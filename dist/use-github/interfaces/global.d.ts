@@ -18,7 +18,11 @@ export interface IGetRepositories {
     pinned: RepositoryGetter;
 }
 export interface IUseGitHubHookReturn {
-    userInfo: IGitHubUserInfo | null;
+    userInfo: (IGitHubUserInfo & {
+        getFollowers: () => IGitHubUserInfo[];
+        getFollowings: () => IGitHubUserInfo[];
+        profileReadme: () => string | null;
+    }) | null;
     metadata: IUseGitHubHookMetadata | null;
     getRepositories: () => IGetRepositories;
 }

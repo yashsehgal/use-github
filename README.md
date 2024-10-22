@@ -1,22 +1,27 @@
-# useGitHub Hook
 
-`useGitHub` is a custom React hook that provides an easy way to fetch and manage GitHub user data and repositories in your React applications.
+# useGitHub - A Custom React Hook for GitHub Data
 
-## Features
+Easily fetch and manage GitHub user data and repositories in your React applications with `useGitHub`.
 
-- Fetch GitHub user information
-- Retrieve user's repositories
-- Get user's pinned repositories
-- Filter repositories by programming language
-- Get top N repositories
+## 🚀 Features
 
-## Installation
+- **Fetch GitHub User Information**: Access basic details about a GitHub user.
+- **Retrieve Repositories**: Fetch all repositories for a user.
+- **Get Pinned Repositories**: Retrieve the user's pinned repositories.
+- **Filter by Language**: Filter repositories by programming language(s).
+- **Top Repositories**: Fetch the top N repositories based on stars, forks, etc.
+
+## 📦 Installation
+
+Get started by installing the necessary dependencies:
 
 ```bash
 npm install use-github-react axios
 ```
 
-## Usage
+## 🛠️ Usage
+
+To use the `useGitHub` hook, simply import and configure it with your GitHub username and personal access token:
 
 ```javascript
 import { useGitHub } from 'use-github-react/dist/use-github';
@@ -27,34 +32,39 @@ const MyComponent = () => {
     personalAccessToken: 'your-github-personal-access-token',
   });
 
-  // Use the hook's returned data and functions
-  // ...
+  // Utilize userInfo, metadata, or repositories here...
 };
 ```
 
-## API
+## 📘 API Documentation
 
 ### Hook Parameters
 
-- `username`: GitHub username
-- `personalAccessToken`: GitHub personal access token (required for fetching pinned repositories)
+| Parameter             | Type   | Description                                |
+|-----------------------|--------|--------------------------------------------|
+| `username`            | string | The GitHub username to fetch data for.     |
+| `personalAccessToken` | string | Personal access token for GitHub API. (Required for pinned repositories) |
 
-### Return Values
+### Returned Values
 
-- `userInfo`: Object containing user information
-- `metadata`: Object containing API response metadata
-- `getRepositories`: Function to access and filter repositories
+| Value            | Type     | Description                                             |
+|------------------|----------|---------------------------------------------------------|
+| `userInfo`       | Object   | Contains user information from GitHub.                  |
+| `metadata`       | Object   | API response metadata.                                  |
+| `getRepositories`| Function | Function that returns repository-related methods.        |
 
-#### `getRepositories()`
+#### Repository Methods
 
-Returns an object with the following methods:
+The `getRepositories()` function returns an object with several useful methods:
 
-- `all()`: Returns all repositories
-- `withLanguage(languages)`: Filters repositories by programming language(s)
-- `top(n)`: Returns top N repositories
-- `pinned()`: Returns pinned repositories
+- **`all()`**: Retrieves all repositories.
+- **`withLanguage(languages)`**: Filters repositories by the specified programming languages.
+- **`top(n)`**: Fetches the top N repositories.
+- **`pinned()`**: Retrieves the user's pinned repositories.
 
-## Example
+## 🔥 Example
+
+Here’s an example of how you can use the hook in a component:
 
 ```javascript
 import { useGitHub } from 'use-github-react/dist/use-github';
@@ -65,20 +75,29 @@ const MyGitHubComponent = () => {
     personalAccessToken: 'your-token-here',
   });
 
+  // Logging fetched data to the console for demonstration
   console.log(userInfo);
   console.log(getRepositories().all());
   console.log(getRepositories().withLanguage(['javascript', 'typescript']));
   console.log(getRepositories().top(5));
   console.log(getRepositories().pinned());
 
-  // Render your component using the data...
+  // You can use this data to render your component...
 };
 ```
 
-## Note
+## ⚙️ Prerequisites
 
-This hook requires the `axios` library. Make sure to install both `use-github-react` and `axios` before using the hook.
+Make sure you've installed the following packages before using the hook:
 
-## License
+```bash
+npm install use-github-react axios
+```
 
-[MIT License](https://opensource.org/licenses/MIT)
+## 🔑 Personal Access Token
+
+To fetch pinned repositories or to make authenticated requests, you’ll need a [GitHub personal access token](https://github.com/settings/tokens). Ensure you have the necessary permissions to access repository information.
+
+## 📝 License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
